@@ -1,11 +1,13 @@
 import { createAuth } from '@keystone-next/auth';
-import { User } from './schemas/User';
-import 'dotenv/config';
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import {
   withItemData,
   statelessSessions,
 } from '@keystone-next/keystone/session';
+import { ProductImage } from './schemas/ProductImage';
+import { User } from './schemas/User';
+import { Product } from './schemas/Product';
+import 'dotenv/config';
 
 const databaseURL = process.env.DATABASE_URL;
 // || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -42,12 +44,13 @@ export default withAuth(
     lists: createSchema({
       // schema items go in here
       User,
+      Product,
+      ProductImage,
     }),
     ui: {
       // Show the UI only for people who pass this test
-      isAccessAllowed: ({ session }) =>
-        // console.log(session);
-        !!session?.data,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      isAccessAllowed: ({ session }) => !!session?.data,
     },
     // TODO: Add session values here
     session: withItemData(statelessSessions(sessionConfig), {
