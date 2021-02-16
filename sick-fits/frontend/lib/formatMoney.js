@@ -6,7 +6,7 @@ export default function formatMoney(amount) {
   }
 
   // check if it's a clean dollar amount
-  if(amount % 100 === 0) {
+  if (amount % 100 === 0) {
     options.minimumFractionDigits = 0
   }
 
