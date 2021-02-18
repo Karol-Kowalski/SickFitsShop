@@ -5,7 +5,7 @@ import Form from './styles/Form';
 import DisplayError from './ErrorMessage';
 
 const CREATE_PRODUCT_MUTATION = gql`
-  mutiation CREATE_PRODUCT_MUTATION(
+  mutation CREATE_PRODUCT_MUTATION(
     # Which variables are getting pasted in? And what types are they
     $name: String!
     $description: String!
@@ -19,11 +19,7 @@ const CREATE_PRODUCT_MUTATION = gql`
         price: $price
         status: "AVAILABLE"
         photo: {
-          create: {
-            image: $image,
-            altText: $name
-          }
-        }
+          create: { image: $image, altText: $name }}
       }
     ) {
       id
@@ -53,6 +49,7 @@ export default function CreateProduct() {
     e.preventDefault();
     // Submit the input fields to the backend:
     const res = await createProduct();
+    clearForm();
   }
 
   return (
