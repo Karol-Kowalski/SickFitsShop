@@ -18,8 +18,7 @@ const CREATE_PRODUCT_MUTATION = gql`
         description: $description
         price: $price
         status: "AVAILABLE"
-        photo: {
-          create: { image: $image, altText: $name }}
+        photo: { create: { image: $image, altText: $name } }
       }
     ) {
       id
@@ -48,13 +47,13 @@ export default function CreateProduct() {
   async function handleSubmit(e) {
     e.preventDefault();
     // Submit the input fields to the backend:
-    const res = await createProduct();
+    await createProduct();
     clearForm();
   }
 
   return (
     <Form onSubmit={handleSubmit}>
-      <DisplayError />
+      <DisplayError error={error} />
       <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="image">
           Image
