@@ -10,11 +10,16 @@ const DELETE_PRODUCT_MUTATION = gql`
   }
 `;
 
+function update(cache, payload) {
+  cache.evict(cache.identify(payload.data.deleteProduct))
+}
+
 export default function DeleteProduct({ id, children }) {
   const [deleteProduct, { loading, error }] = useMutation(
     DELETE_PRODUCT_MUTATION,
     {
       variables: { id },
+      update: update,
     }
   );
   return (
@@ -25,7 +30,7 @@ export default function DeleteProduct({ id, children }) {
         if (confirm('Are you sure you want to delete this item?')) {
           // go aheadf and delete it
           console.log('Delete');
-          deleteProduct().catch(err => alert(err.message));
+          deleteProduct().catch((err) => alert(err.message));
         }
       }}
     >
