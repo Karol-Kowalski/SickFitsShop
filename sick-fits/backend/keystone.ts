@@ -26,6 +26,11 @@ const { withAuth } = createAuth({
     fields: ['name', 'email', 'password'],
     // TODO: Add in initial roles here
   },
+  passwordResetLink: {
+    async sendToken(args) {
+      console.log(args);
+    }
+  }
 });
 
 export default withAuth(
@@ -41,6 +46,7 @@ export default withAuth(
       adapter: 'mongoose',
       url: databaseURL,
       async onConnect(keystone) {
+        console.log('Connected to the database!');
         if (process.argv.includes('--seed-data')) {
           await insertSeedData(keystone);
         }
@@ -55,7 +61,9 @@ export default withAuth(
     ui: {
       // Show the UI only for people who pass this test
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      isAccessAllowed: ({ session }) => !!session?.data,
+      isAccessAllowed: ({ session }) =>
+        // console.log(session);
+        !!session?.data,
     },
     // TODO: Add session values here
     session: withItemData(statelessSessions(sessionConfig), {
