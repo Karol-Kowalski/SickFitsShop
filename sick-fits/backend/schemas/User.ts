@@ -17,5 +17,6 @@ export const User = list({
       },
     }),
     // TODO cards roles and orders
+    orders: relationship({ ref: 'Order.user', many: true }),
   },
 });
