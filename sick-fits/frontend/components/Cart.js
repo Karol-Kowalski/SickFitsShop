@@ -7,6 +7,7 @@ import formatMoney from '../lib/formatMoney';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import { useCart } from '../lib/CartState';
 import RemoveFromCart from './RemoveFromCart';
+import { Checkout } from './Checkout';
 
 const CartItemStyles = styled.li`
   padding: 0;
@@ -62,6 +63,7 @@ export default function Cart() {
       </ul>
       <footer>
         <p>{formatMoney(calcTotalPrice(me.cart))}</p>
+        <Checkout />
       </footer>
     </CartStyles>
   );
