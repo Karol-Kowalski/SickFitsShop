@@ -8,7 +8,7 @@ import {
 } from '@stripe/react-stripe-js';
 import { useState } from 'react';
 import nProgress from 'nprogress';
-import { useMutation } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/dist/client/router';
 import { useCart } from '../lib/CartState';
 import SickButton from './styles/SickButton';
